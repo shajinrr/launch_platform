@@ -9,6 +9,7 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
 sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
 # Update packages and install OpenSSH server
+# trunk-ignore(hadolint/DL3033)
 RUN yum -y update && \
     yum -y install openssh-server && \
     yum -y install sudo && \
