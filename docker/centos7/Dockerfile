@@ -50,4 +50,4 @@ ENTRYPOINT ["/bin/bash"]
 
 
 #Set the entrypoint directly within the Dockerfile
-ENTRYPOINT ["/bin/bash", "-c", "chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh && /bin/bash"]
+#ENTRYPOINT ["/bin/bash", "-c", "chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh && /bin/bash"]
