@@ -1,0 +1,53 @@
+version: '3'
+services:
+  jenkins: 
+    container_name: jenkins
+    image: jenkins-custom-image
+    user: root
+    build: 
+      context: docker/jenkins
+    volumes:
+      - /home/shajin/POC/jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock # Add this line to mount the Docker socket
+    networks:
+      - net
+  
+  centos7: 
+    container_name: centos7
+    image: centos7-custom-image
+    build: 
+      context: docker/centos7
+    # volumes:
+    #   - /home/shajin/POC/jenkins-data:/var/jenkins_home
+    
+    networks:
+      - net
+
+  # storefront1: 
+  #   container_name: storefront1
+  #   hostname: storefront1
+  #   image: hybris
+  #   privileged: true
+  #   build: 
+  #     context: docker/hybris
+  #   networks:
+  #     - net
+  # storefront2: 
+  #   container_name: storefront2
+  #   hostname: storefront1
+  #   image: hybris
+  #   build: 
+  #     context: docker/hybris
+  #   networks:
+  #     - net
+  # solr: 
+  #   container_name: solr
+  #   hostname: storefront1
+  #   image: hybris
+  #   build: 
+  #     context: docker/hybris
+  #   networks:
+  #     - net
+networks:
+  net:
+  
