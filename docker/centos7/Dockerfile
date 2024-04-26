@@ -27,7 +27,7 @@ RUN useradd -m -s /bin/bash $USERNAME && \
 # Set password for the user 'centos' (replace 'password' with your desired password)
 RUN echo 'centos:password' | chpasswd
 RUN mkdir /home/$USERNAME/.ssh && chmod 700 /home/$USERNAME/.ssh
-COPY ./keys/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
+# COPY ./keys/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
 # Set the user as the default user for the image
 USER $USERNAME
@@ -44,7 +44,8 @@ RUN echo "Welcome to the CentOS image with user '$USERNAME'!"
 EXPOSE 22
 
 
-COPY entrypoint.sh /entrypoint.sh
+# Set the entry point to /bin/bash
+ENTRYPOINT ["/bin/bash"]
 
 
 
