@@ -40,14 +40,16 @@ WORKDIR /home/$USERNAME
 # Print a welcome message
 RUN echo "Welcome to the CentOS image with user '$USERNAME'!"
 
-# Expose the HTTP port
+# # Expose the HTTP port
 EXPOSE 22
 
 
 # Set the entry point to /bin/bash
-ENTRYPOINT ["/bin/bash"]
+# ENTRYPOINT ["/bin/bash"]
 
 
 
 #Set the entrypoint directly within the Dockerfile
 #ENTRYPOINT ["/bin/bash", "-c", "chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh && /bin/bash"]
+# Set the entry point to /bin/bash
+ENTRYPOINT ["/bin/bash", "-c", "chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh && exec /bin/bash"]

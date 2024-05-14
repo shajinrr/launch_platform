@@ -1,5 +1,5 @@
 # Use the official Jenkins LTS base image
-FROM jenkins/jenkins:lts AS build
+FROM jenkins/jenkins:latest
 
 USER root
 
@@ -18,8 +18,8 @@ RUN apt-get update && apt-get -yf install apt-transport-https \
       && rm -rf /var/lib/apt/lists/*
 # RUN apt-get install -y systemctl
 
-#Install Docker Compose
-RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+# #Install Docker Compose
+# RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 
 
 
@@ -47,14 +47,21 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip 
 RUN ./aws/install
 
+#Download plugins.txt from internet
+RUN curl -fsSL https://raw.githubusercontent.com/faudeltn/Jenkins/master/build/centos/plugins.txt -o /usr/share/jenkins/ref/plugins.txt \
+&& echo "sonar" >> /usr/share/jenkins/ref/plugins.txt && echo  "configuration-as-code" >> /usr/share/jenkins/ref/plugins.txt
 
-
-# Download plugins.txt from internet
-RUN curl -fsSL https://raw.githubusercontent.com/faudeltn/Jenkins/master/build/centos/plugins.txt -o /usr/share/jenkins/ref/plugins.txt
 #/usr/share/jenkins/ref/plugins.txt
 
 # Install recommended plugins listed in plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+
+
+#Add the Job automatically during Launch
+RUN mkdir -p /var/jenkins_home/jobs/freestyle_test
+#COPY jobs/freestyle_test/config.xml /var/jenkins_home/jobs/freestyle_test/config.xml
+ADD jobs/freestyle_test/config.xml /var/jenkins_home/jobs/freestyle_test/config.xml
+
 
 #id_rsa.pub file will be saved at /root/.ssh/
 #RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
@@ -66,21 +73,20 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 ENV JENKINS_USER admin
 ENV JENKINS_PASS ThisIs@StrongP@ssword
 
+
+
 # Jenkins runs all grovy files from init.groovy.d dir
 # use this for creating default admin user
 # Copy the Groovy script
 COPY 10-sleep.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY 20-default-user.groovy /usr/share/jenkins/ref/init.groovy.d/
 
+
+
 # Set ownership of Jenkins home directory
 RUN chown -R jenkins:jenkins /var/jenkins_home
 
 
-# # Stage 2: Final stage
-# FROM jenkins/jenkins:lts
-
-# # Copy only necessary files from the build stage
-# COPY --from=build /var/jenkins_home /var/jenkins_home
 
 # Set Jenkins as the user
 USER jenkins
