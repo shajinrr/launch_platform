@@ -82,10 +82,7 @@ COPY 10-sleep.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY 20-default-user.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 
-
-# Set ownership of Jenkins home directory
-RUN chown -R jenkins:jenkins /var/jenkins_home
-
+RUN chown -R 1000:1000 /var/jenkins_home
 
 
 # Set Jenkins as the user
@@ -93,8 +90,8 @@ USER jenkins
 
 # Expose the HTTP port
 EXPOSE 8080
-
 # Expose the agent port
 EXPOSE 50000
 
-
+# # Run the chown command before executing the entrypoint script
+# CMD ["sh", "-c", "chown -R jenkins:jenkins /var/jenkins_home && exec \"$@\"", "/usr/local/bin/jenkins.sh"]
