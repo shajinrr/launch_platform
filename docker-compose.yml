@@ -21,9 +21,10 @@ services:
     image: centos7-custom-image
     build: 
       context: docker/centos7
-    working_dir: /usr
-    privileged: true
-    command: bash
+    # working_dir: /usr
+    # privileged: true
+    # command: bash
+    restart: unless-stopped
     networks:
       - net
 
