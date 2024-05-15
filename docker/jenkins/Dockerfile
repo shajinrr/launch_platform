@@ -47,10 +47,20 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip 
 RUN ./aws/install
 
-#Download plugins.txt from internet
+# Download plugins.txt from the internet and remove the depricated items
 RUN curl -fsSL https://raw.githubusercontent.com/faudeltn/Jenkins/master/build/centos/plugins.txt -o /usr/share/jenkins/ref/plugins.txt \
-&& echo "sonar" >> /usr/share/jenkins/ref/plugins.txt && echo  "configuration-as-code" >> /usr/share/jenkins/ref/plugins.txt
+    && echo "sonar" >> /usr/share/jenkins/ref/plugins.txt \
+    && echo "configuration-as-code" >> /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^ace-editor$/d' /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^handlebars$/d' /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^momentjs$/d' /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^pipeline-model-declarative-agent$/d' /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^jquery-detached$/d' /usr/share/jenkins/ref/plugins.txt \
+    && sed -i '/^workflow-cps-global-lib$/d' /usr/share/jenkins/ref/plugins.txt
 
+
+    
+    
 #/usr/share/jenkins/ref/plugins.txt
 
 # Install recommended plugins listed in plugins.txt
@@ -85,6 +95,9 @@ COPY 20-default-user.groovy /usr/share/jenkins/ref/init.groovy.d/
 RUN chown -R 1000:1000 /var/jenkins_home
 
 
+# Generate SSH key pair to use to connect the remote containers
+RUN ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+
 # Set Jenkins as the user
 USER jenkins
 
@@ -92,6 +105,3 @@ USER jenkins
 EXPOSE 8080
 # Expose the agent port
 EXPOSE 50000
-
-# # Run the chown command before executing the entrypoint script
-# CMD ["sh", "-c", "chown -R jenkins:jenkins /var/jenkins_home && exec \"$@\"", "/usr/local/bin/jenkins.sh"]
