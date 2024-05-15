@@ -3,7 +3,7 @@ services:
   jenkins: 
     container_name: jenkins
     image: jenkins-custom-image
-    user: root
+    user: jenkins
     build: 
       context: docker/jenkins
     volumes:
@@ -15,18 +15,104 @@ services:
       - CASC_JENKINS_CONFIG=/var/jenkins_conf
     networks:
       - net
-  
-  centos7: 
-    container_name: centos7
+      
+  # centos_1:
+    # image: centos7-custom-image
+    # build:
+    #   context: ./docker/centos7
+    # restart: unless-stopped
+    # networks:
+    #   - net
+
+  # centos_2:
+  #   image: centos7-custom-image
+  #   build:
+  #     context: ./docker/centos7
+  #   restart: unless-stopped
+  #   networks:
+  #     - net
+
+  # ubuntu_1:
+    # image: ubuntu-custom-image
+    # build:
+    #   context: ./docker/ubuntu
+    # restart: unless-stopped
+    # networks:
+    #   - net 
+  # ubuntu_2:
+  #   image: ubuntu-custom-image
+  #   build:
+  #     context: ./docker/ubuntu
+  #   restart: unless-stopped
+  #   networks:
+  #     - net 
+
+  centos_1:
+    container_name: prod_app
     image: centos7-custom-image
-    build: 
-      context: docker/centos7
-    # working_dir: /usr
-    # privileged: true
-    # command: bash
+    build:
+      context: ./docker/centos
     restart: unless-stopped
     networks:
       - net
+    labels:
+      - "environment=prod"
+
+  centos_2:
+    container_name: stge_app
+    image: centos7-custom-image
+    build:
+      context: ./docker/centos
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "environment=stge"
+
+  centos_3:
+    container_name: dev_app
+    image: centos7-custom-image
+    build:
+      context: ./docker/centos
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "environment=dev"
+
+  ubuntu_1:
+    container_name: prod_web
+    image: ubuntu-custom-image
+    build:
+      context: ./docker/ubuntu
+    restart: unless-stopped
+    networks:
+      - net 
+    labels:
+      - "environment=prod"
+
+  ubuntu_2:
+    container_name: stge_web
+    image: ubuntu-custom-image
+    build:
+      context: ./docker/ubuntu
+    restart: unless-stopped
+    networks:
+      - net 
+    labels:
+      - "environment=stge"
+
+  ubuntu_3:
+    container_name: dev_web
+    image: ubuntu-custom-image
+    build:
+      context: ./docker/ubuntu
+    restart: unless-stopped
+    networks:
+      - net 
+    labels:
+      - "environment=dev"
+
 
 
 networks:
