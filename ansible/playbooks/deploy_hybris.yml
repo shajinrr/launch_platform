@@ -1,0 +1,9 @@
+---
+- name: Deploy changes to hosts
+  hosts: hybris
+  gather_facts: no
+  strategy: free
+  roles:
+    - hybris
+
+

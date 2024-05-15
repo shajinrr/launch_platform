@@ -1,0 +1,18 @@
+# ---
+# - name: Deploy changes to hosts
+#   hosts: solr
+#   gather_facts: no
+#   roles:
+#     - solr
+
+- name: Deploy changes to Solr Master
+  hosts: solr_master
+  gather_facts: no
+  roles:
+    - solr
+
+- name: Deploy changes to Solr Slave
+  hosts: solr_slave
+  gather_facts: no
+  roles:
+    - solr

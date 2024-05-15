@@ -1,0 +1,12 @@
+# ---
+# servers:
+#   - { server: 'DA016' }
+#   - { server: 'DA019' }
+#   - { server: 'DA023' }
+#   - { server: 'DA106' }
+
+servers_map:
+  VMG7222DA016.utcdmz.com: DA016
+  VMG7222DA106.utcdmz.com: DA106
+  VMG7222DA019.utcdmz.com: DA019
+  VMG7222DA023.utcdmz.com: DA023

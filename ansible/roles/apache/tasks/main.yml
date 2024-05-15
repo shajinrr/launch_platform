@@ -1,0 +1,11 @@
+# ---
+# - name: Ping all hosts
+#   ansible.builtin.ping:
+
+
+---
+- name: Include prechecks
+  include_tasks: prechecks.yml
+- name: Configure Apache
+  include_tasks: configure_apache.yml
+

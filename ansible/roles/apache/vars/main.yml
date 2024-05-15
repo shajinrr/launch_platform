@@ -1,0 +1,8 @@
+---
+packages:
+  - httpd
+  - unzip
+  - rsync
+  - net-tools
+  # - lsof
+  # - nfs-common

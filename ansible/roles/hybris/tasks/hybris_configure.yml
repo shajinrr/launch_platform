@@ -1,0 +1,52 @@
+---
+- name: Debug servers_map
+  debug:
+    var: hybris_servers_map
+
+- name: Copy appsdata to server
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/appsdata.zip"
+    dest: "/appsdata"
+  become: yes
+  become_user: hybris
+
+- name: Unzip appsdata.zip file
+  ansible.builtin.unarchive:
+    src: "/appsdata/appsdata.zip"
+    dest: "/appsdata/"
+    remote_src: yes
+  become: yes
+  become_user: hybris
+
+- name: Copy Custom Artifact to server
+  ansible.builtin.copy:
+    src: "{{ hybris_files_dir }}/custom.zip"
+    dest: "/appsdata/hybris/bin/"
+  become: yes
+  become_user: hybris
+
+- name: Unzip Custom Artifact
+  ansible.builtin.unarchive:
+    src: "/appsdata/hybris/bin/custom.zip"
+    dest: "/appsdata/hybris/bin/"
+    remote_src: yes
+  become: yes
+  become_user: hybris
+
+- name: Remove appsdata.zip
+  ansible.builtin.file:
+    path: "/appsdata/appsdata.zip"
+    state: absent
+
+- name: Remove custom.zip
+  ansible.builtin.file:
+    path: "/appsdata/hybris/bin/custom.zip"
+    state: absent
+
+- name: Copy local.properties to server
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'PWD') }}/configs/{{ environment1 }}/{{ item }}/local.properties"
+    dest: "/appsdata/hybris/config/local.properties"
+  loop: "{{ servers }}"
+  vars:
+    servers: "{{ hybris_servers_map.keys() | list }}"

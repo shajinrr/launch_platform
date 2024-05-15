@@ -1,0 +1,148 @@
+---
+- name: Prepare binary setup
+  hosts: localhost
+  vars: 
+    # hybris_commerce2205_version: "CXCOMM220500P_0-80006942.ZIP"
+    # hybris_commerce2205_sapmodules: "CXCOMINTPK220500P_0-80006941.ZIP"
+    # hybris_commerce2205_sapcorecockpit: "corecockpit.zip"
+    hybris_commerce2205_dir: "appsdata"
+    hybris_commerce2205_user: "centos"
+    #hybris_commerce2205_custom_dir: "{{ hybris_commerce2205_dir }}/hybris/bin/custom"
+    #java_version_file: "sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz"
+    #hybris_commerce2205_user_home: "/home/centos"
+    hybris_files_dir: "/home/shajin/POC/hybris2205"
+    hybris_bashrc: "{{ hybris_files_dir }}/bashrc.txt"
+    hybris_version_zip: "{{ hybris_files_dir }}/CXCOMM220500P_0-80006942.ZIP"
+    hybris_sapmodules_zip: "{{ hybris_files_dir }}/CXCOMINTPK220500P_0-80006941.ZIP"
+    hybris_corecockpit_zip: "{{ hybris_files_dir }}/corecockpit.zip"
+    # java_version_tar: "{{ hybris_files_dir }}/sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz"
+    config_dir: "{{ hybris_files_dir }}/config/"
+    wrapper_conf: "{{ hybris_files_dir }}/wrapper.conf"
+    custom_dir: "{{ hybris_files_dir }}/custom/"
+  tasks:
+    - name: debugg
+      debug:
+        var: "{{ item }}"
+      loop:
+        - hybris_commerce2205_version
+        - hybris_commerce2205_sapmodules
+    - name: Check if the destination directory exists
+      ansible.builtin.stat:
+        path: "/tmp/extracted_zip"
+      register: dest_dir
+ 
+    - name: Create the destination directory if it doesn't exist
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip"
+        state: directory
+      when: not dest_dir.stat.exists
+
+    - name: Extract contents of the ZIP file
+      ansible.builtin.unarchive:
+        src: "{{ hybris_version_zip }}"
+        dest: /tmp/extracted_zip
+
+    - name: Create {{ hybris_commerce2205_dir }} directory
+      ansible.builtin.file:
+        path: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}"
+        state: directory
+ 
+
+    - name: Copy required directories to appsdata
+      ansible.builtin.copy:
+        src: "{{ item }}/"
+        dest: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/{{ item | basename }}"
+        remote_src: yes
+        force: yes
+      loop:
+        - /tmp/extracted_zip/hybris
+        - /tmp/extracted_zip/installer
+        - /tmp/extracted_zip/build-tools
+        - /tmp/extracted_zip/licenses 
+
+    - name: Sleep for 1 seconds
+      ansible.builtin.pause:
+        seconds: 1
+      
+    - name: Remove temporary directory
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip"
+        state: absent
+ 
+
+    - name: Check if the destination directory exists
+      ansible.builtin.stat:
+        path: "/tmp/extracted_zip2"
+      register: dest_dir2
+      
+
+    - name: Create the destination directory if it doesn't exist
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip2"
+        state: directory
+      when: not dest_dir2.stat.exists
+      
+
+    - name: Extract contents of the ZIP file
+      ansible.builtin.unarchive:
+        src: "{{ hybris_sapmodules_zip }}"
+        dest: "/tmp/extracted_zip2"
+      
+
+    - name: Copy modules directory to {{ hybris_commerce2205_dir }}/bin
+      ansible.builtin.copy:
+        src: "/tmp/extracted_zip2/hybris/bin/modules/"
+        dest: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/hybris/bin/modules/"
+        remote_src: yes
+    
+
+    - name: Remove temporary directory
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip2"
+        state: absent
+
+
+
+    - name: Check if the destination directory exists
+      ansible.builtin.stat:
+        path: "/tmp/extracted_zip3"
+      register: dest_dir3
+
+    - name: Create the destination directory if it doesn't exist
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip3"
+        state: directory
+      when: not dest_dir3.stat.exists
+
+    - name: Extract contents of Hybris Cockpit 
+      ansible.builtin.unarchive:
+        src: "{{ hybris_corecockpit_zip }}"
+        dest: "/tmp/extracted_zip3"
+
+    - name: Copy Hybris Cockpit
+      ansible.builtin.copy:
+        src: "/tmp/extracted_zip3/corecockpit/"
+        dest: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/hybris/bin/corecockpit/"
+        remote_src: yes
+
+    - name: Copy required directories to appsdata using shell commands
+      ansible.builtin.shell:
+        cmd: "cp -r {{ item.src }}/* {{ item.dest }}"
+      with_items:
+          - { src: "/tmp/extracted_zip3/corecockpit/", dest: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/hybris/bin/corecockpit/" }
+          - { src: "/tmp/extracted_zip3/ext-cockpit/", dest: "{{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/hybris/bin/ext-cockpit/" }
+
+    - name: Remove temporary directory
+      ansible.builtin.file:
+        path: "/tmp/extracted_zip3"
+        state: absent
+
+    - name: Copy wrapper_conf and Configs recursively
+      ansible.builtin.shell:
+        cmd: "rsync -av {{ config_dir }}/ {{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }}/hybris/config"
+
+    - name: Zip the Hybris Binaries
+      ansible.builtin.shell:
+        cmd: "cd {{ lookup('env', 'PWD') }}/{{ hybris_commerce2205_dir }} && zip -r appsdata.zip *"
+
+

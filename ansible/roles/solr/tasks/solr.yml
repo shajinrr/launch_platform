@@ -1,0 +1,78 @@
+---
+
+- name: Check if the destination directory exists
+  ansible.builtin.stat:
+    path: "/tmp/extracted_zip"
+  register: dest_dir
+
+- name: Create the destination directory if it doesn't exist
+  ansible.builtin.file:
+    path: "/tmp/extracted_zip"
+    state: directory
+  when: not dest_dir.stat.exists
+
+- name: Extract contents of the ZIP file
+  ansible.builtin.unarchive:
+    src: "{{ hybris_version_zip }}"
+    dest: /tmp/extracted_zip
+  
+- name: Copy Solr Module directory to server
+  ansible.builtin.copy:
+    src: "/tmp/extracted_zip/hybris/bin/modules/search-and-navigation/solrserver/resources/solr"
+    dest: "/{{ solr_dir }}/"
+    remote_src: yes
+    owner: hybris
+    group: hybris
+
+- name: Sleep for 1 seconds
+  ansible.builtin.pause:
+    seconds: 1
+
+- name: Chown the Solr home directory
+  file:
+    path: "/{{ solr_dir }}/"
+    owner: '{{ solr_user["name"] }}'
+    group: '{{ solr_group }}'
+    state: directory
+    recurse: true
+    force: true
+  become: yes
+  become_method: sudo
+  become_user: hybris
+
+- name: Set executable permissions for solr binary
+  ansible.builtin.file:
+    path: "{{ solr_home_path }}/solr"
+    mode: u+x
+  become: yes
+  become_method: sudo
+  become_user: hybris
+
+- name: Adjusting Solr java heap memory and other settings
+  template:
+    src: '{{ solr_insh_template_path }}.j2'
+    dest: '{{ solr_insh_path }}/solr.in.sh'
+    owner: '{{ solr_user.name }}'
+    group: '{{ solr_group }}'
+    mode: 0640
+  become: true
+
+- name: Install Solr service
+  template:
+    src: '{{ solr_service_template_path }}.j2'
+    dest: '/lib/systemd/system/{{ solr_service_name }}.service'
+  become: true
+
+
+- name: Ensure the service is enabled
+  become: true
+  systemd:
+    name: solr.service
+    enabled: true
+
+
+- name: Ensure the service is Started 
+  become: true
+  systemd:
+    name: solr.service
+    state: started

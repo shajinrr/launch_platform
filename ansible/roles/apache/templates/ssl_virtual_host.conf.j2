@@ -1,0 +1,26 @@
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerName {{ server_name }}
+        DocumentRoot /var/www/html
+
+        SSLEngine on
+        SSLCertificateFile /etc/pki/tls/server.crt
+        SSLCertificateKeyFile /etc/pki/tls/server.key
+
+        # Optional: Specify additional SSL configuration settings here
+
+        ErrorLog /var/log/httpd/ssl_error.log
+        CustomLog /var/log/httpd/ssl_access.log combined
+
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+            SSLOptions +StdEnvVars
+        </FilesMatch>
+
+        <Directory "/var/www/html">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+    </VirtualHost>
+</IfModule>

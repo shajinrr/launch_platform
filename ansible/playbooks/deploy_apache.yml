@@ -1,0 +1,7 @@
+---
+- name: Deploy changes to hosts
+  hosts: apache
+  gather_facts: no
+  strategy: free
+  roles:
+    - apache

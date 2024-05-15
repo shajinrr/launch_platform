@@ -1,0 +1,35 @@
+- name: Create /usr/java directory if it doesn't exist
+  ansible.builtin.file:
+    path: /usr/java
+    state: directory
+    mode: "0755"
+  ignore_errors: yes
+
+- name: Set appropriate permissions for SAPMachine JDK directory
+  ansible.builtin.file:
+    path: /usr/java
+    owner: root
+    group: root
+    mode: "0755"
+    recurse: yes
+
+- name: Copy SAPMachine JDK installation package to remote server
+  ansible.builtin.copy:
+    src: "{{ hybris_files_dir }}/sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz"
+    dest: /tmp/sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz
+
+
+- name: Extract SAPMachine JDK installation package
+  ansible.builtin.unarchive:
+    src: /tmp/sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz
+    dest: /usr/java
+    remote_src: yes
+
+
+- name: Create a shell script to set Java environment variables
+  ansible.builtin.copy:
+    content: |
+      export JAVA_HOME=/usr/java/sapmachine-jdk-17.0.5
+      export PATH=$PATH:$JAVA_HOME/bin
+    dest: /etc/profile.d/java.sh
+    mode: "0644"

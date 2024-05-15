@@ -1,0 +1,10 @@
+---
+# # Hybris user
+# hybris_group: hybris
+# hybris_user:
+#   name: hybris
+#   group: '{{ hybris_group }}'
+#   uid: 7001
+#   createhome: true
+#   system: true
+server_name: customers-poc.collinsaerospace.com

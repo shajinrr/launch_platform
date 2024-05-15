@@ -1,0 +1,6 @@
+# - name: Set Java installation directory on non-Debian platforms
+#   set_fact:
+#     java_install_dir: /usr/lib/jvm
+#     java_default_link_name: java
+#     java_home: /usr/lib/jvm/default
+#   when: ansible_os_family == "RedHat" or ansible_os_family == "Suse"

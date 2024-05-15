@@ -1,0 +1,48 @@
+---
+packages:
+  # - imagemagick
+  - unzip
+  - rsync
+  - lsof
+  # - nfs-common
+
+
+# # hybris_commerce2205_version: "CXCOMM220500P_0-80006942.ZIP"
+# # hybris_commerce2205_sapmodules: "CXCOMINTPK220500P_0-80006941.ZIP"
+# # hybris_commerce2205_sapcorecockpit: "corecockpit.zip"
+# hybris_commerce2205_dir: "appsdata"
+# hybris_commerce2205_user: "hybris"
+# hybris_commerce2205_custom_dir: "{{ hybris_commerce2205_dir }}/hybris/bin/custom"
+# java_version_file: "sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz"
+# hybris_commerce2205_user_home: "/home/hybris"
+hybris_files_dir: "/home/shajin/POC/hybris2205"
+# hybris_bashrc: "{{ hybris_files_dir }}/bashrc.txt"
+# # hybris_version_zip: "{{ hybris_files_dir }}/CXCOMM220500P_0-80006942.ZIP"
+# # hybris_sapmodules_zip: "{{ hybris_files_dir }}/CXCOMINTPK220500P_0-80006941.ZIP"
+# # hybris_corecockpit_zip: "{{ hybris_files_dir }}/corecockpit.zip"
+# java_version_tar: "{{ hybris_files_dir }}/sapmachine-jdk-17.0.5_linux-x64_bin.tar.gz"
+# # config_dir: "{{ hybris_files_dir }}/config/"
+# # wrapper_conf: "{{ hybris_files_dir }}/wrapper.conf"
+# custom_dir: "{{ hybris_files_dir }}/custom/"
+
+
+
+
+# # Define variables based on the environment
+# vars:
+#   prod:
+#     inventory_dir: "PROD"
+#   dev:
+#     inventory_dir: "DEV"
+#   qa01:
+#     inventory_dir: "QA01"
+#   qa02:
+#     inventory_dir: "QA02"
+# # Define configuration files for each server
+# vars_files:
+#   - "{{ playbook_dir }}/inventories/{{ inventory_dir }}/group_vars/all.yaml"
+# # Define server configurations based on the environment
+# vars_prompt:
+#   - name: "ENVIRONMENT"
+#     prompt: "Enter environment (PROD, DEV, QA01, QA02): "
+#     private: no

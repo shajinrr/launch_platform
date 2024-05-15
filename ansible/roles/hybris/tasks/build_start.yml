@@ -1,0 +1,52 @@
+---
+- name: Run ant server
+  shell:
+    cmd: >
+      bash -c 'source setantenv.sh &&
+      cd /appsdata/hybris/bin/platform/ &&
+      ant all'
+    chdir: '/appsdata/hybris/bin/platform/' # variable to be applied
+  become: true
+  become_user: hybris
+  async: 600  # Set a timeout for the asynchronous task
+  poll: 10   # Check for output every 10 seconds (adjust as needed)
+  register: ant_task
+
+- debug:
+    var: ant_task
+
+
+# - name: Wait for ant task to finish
+#   async_status:
+#     jid: "{{ ant_task.ansible_job_id }}"
+#   register: job_result
+#   until: job_result.finished
+#   retries: 30  # Retry 30 times, adjust as needed
+#   delay: 10    # Wait 10 seconds between retries
+
+# - debug:
+#     var: job_result
+
+- name: Gather ant task output
+  debug:
+    msg: "{{ item.stdout }}"
+  with_items: "{{ job_result.results }}"
+  when: item.stdout is defined
+
+- name: Chown the Hybris home directory
+  file:
+    path: '/appsdata/'
+    owner: '{{ hybris_user["name"] }}'
+    group: '{{ hybris_group }}'
+    state: directory
+    recurse: true
+  become: yes
+  become_user: hybris
+
+- name: Start Hybris Service
+  shell:
+    cmd: >
+      bash -c './hybrisserver.sh start'
+    chdir: '/appsdata/hybris/bin/platform/' # variable to be applied
+  become: yes
+  become_user: hybris

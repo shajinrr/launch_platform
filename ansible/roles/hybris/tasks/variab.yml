@@ -1,0 +1,10 @@
+---
+
+# - hosts: localhost
+#   become: false
+#   gather_facts: false
+
+#   tasks:
+- name: Debug variables
+  debug:
+    var: hybris_bashrc

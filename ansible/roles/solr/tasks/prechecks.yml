@@ -1,0 +1,20 @@
+---
+
+- name: Ping all hosts
+  ansible.builtin.ping:
+- name: Install apt packages
+  package:
+    name: '{{ packages }}'
+    state: present
+  retries: 3
+  register: installed_packages
+  until: installed_packages is succeeded
+  become: true
+
+- name: Ensure /appsdata directory exists
+  ansible.builtin.file:
+    path: "/{{ solr_dir }}/"
+    state: directory
+    owner: hybris
+    group: hybris
+    mode: "0755"

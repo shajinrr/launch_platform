@@ -1,0 +1,29 @@
+---
+# Hybris user
+solr_group: hybris
+solr_user:
+  name: hybris
+  group: '{{ solr_group }}'
+  uid: 1001
+  createhome: true
+  system: true
+
+solr_dir: "appsdata"
+hybris_version_zip: "{{ hybris_files_dir }}/CXCOMM220500P_0-80006942.ZIP"
+
+solr_service_name: solr
+solr_service_autostart: true
+solr_service_template_path: solr.service
+
+solr_insh_template_path: solr.in.sh
+solr_insh_path: /appsdata/solr/8.11/server/bin
+solr_home_path: /appsdata/solr/8.11/server/bin
+solr_dest_path: /appsdata/solr/8.11/server
+
+java_home: /usr/java/sapmachine-jdk-17.0.5/
+solr_java_xms: 512m
+solr_java_xmx: 512m
+solr_port: 8983
+solr_logs: /appsdata/solr/8.11/server/server/logs
+
+solr_service_restart: true

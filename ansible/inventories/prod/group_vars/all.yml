@@ -1,0 +1,9 @@
+---
+
+hybris_servers_map:
+  storefront: 172.17.0.2
+  # storefront2: 172.17.0.3
+
+solr_servers_map:
+  solr_master: 172.17.0.3
+  solr_slave: 172.17.0.4

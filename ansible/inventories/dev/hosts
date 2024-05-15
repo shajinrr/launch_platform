@@ -1,0 +1,5 @@
+[dev_app_servers]
+dev_app ansible_host=172.18.0.5 ansible_user=centos ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become=yes
+
+[dev_web_servers]
+dev_web ansible_host=172.18.0.8 ansible_user=ubuntu ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become=yes

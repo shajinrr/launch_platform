@@ -1,0 +1,10 @@
+# ---
+# - name: Set Java environment
+#   ansible.builtin.shell:
+#     cmd: |
+#       alternatives --install /usr/bin/java java /usr/java/sapmachine-jdk-17.0.5/bin/java 1
+#       alternatives --set java /usr/java/sapmachine-jdk-17.0.5/bin/java
+# ---
+# - name: restart apache
+#   ansible.builtin.service:
+#     name: httpd

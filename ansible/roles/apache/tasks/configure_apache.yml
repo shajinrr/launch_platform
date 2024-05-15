@@ -1,0 +1,66 @@
+---
+
+
+
+- name: Ensure Apache service is enabled and started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Copy Apache files to container
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'PWD') }}/roles/apache/files/content/{{ item }}"
+    dest: /var/www/html/ 
+  with_items:
+    - image.png
+    - index.html
+  # notify: restart apache
+
+- name: Install mod_ssl module
+  ansible.builtin.package:
+    name: mod_ssl
+    state: present
+
+- name: Copy SSL certificate files to server
+  ansible.builtin.copy:
+    src: "{{ lookup('env', 'PWD') }}/roles/apache/files/certs/{{ item }}"
+    dest: "/etc/pki/tls/"
+  with_items:
+  - server.key
+  - server.crt
+
+- name: Enable SSL module
+  ansible.builtin.lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: "^#?(Include conf.modules.d/00-ssl.conf)$"
+    line: "Include conf.modules.d/00-ssl.conf"
+    state: present
+
+- name: Configure SSL Virtual Host
+  ansible.builtin.template:
+    src: ssl_virtual_host.conf.j2   # Create a template file for SSL virtual host configuration
+    dest: /etc/httpd/conf.d/ssl.conf
+    mode: 0644
+  # notify: restart apache
+
+- name: Add Listen 443 directive
+  ansible.builtin.lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    line: "Listen 443"
+
+- name: Sleep for 2 seconds
+  ansible.builtin.shell:
+    cmd: sleep 2
+
+- name: Ensure Apache service is enabled and started
+  ansible.builtin.service:
+    name: httpd
+    state: stopped
+    enabled: yes
+- name: Ensure Apache service is enabled and started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+

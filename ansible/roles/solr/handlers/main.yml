@@ -1,0 +1,8 @@
+---
+- name: restart Solr
+  systemd:
+    name: '{{ solr_service_name }}'
+    state: restarted
+    daemon_reload: true
+    enabled: '{{ solr_service_autostart }}'
+  become: true

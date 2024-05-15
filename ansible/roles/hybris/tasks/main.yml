@@ -1,0 +1,12 @@
+---
+- name: Include prechecks
+  include_tasks: prechecks.yml
+
+- name: Install Java
+  include_tasks: install_java.yml
+
+- name: Configure Hybris
+  include_tasks: hybris_configure.yml
+
+- name: Build and start
+  include_tasks: build_start.yml

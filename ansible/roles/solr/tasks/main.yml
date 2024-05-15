@@ -1,0 +1,11 @@
+---
+- name: Include prechecks
+  include_tasks: prechecks.yml
+
+- name: Install Java
+  include_tasks: install_java.yml
+
+- name: Install Solr
+  include_tasks: solr.yml
+
+  

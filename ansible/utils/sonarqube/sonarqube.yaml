@@ -1,0 +1,47 @@
+---
+- name: Check Code Quality using SonarQube
+  hosts: localhost # Replace 'localhost' with your target host if needed
+  gather_facts: false
+
+  tasks:
+    - name: Install required Python packages
+      pip:
+        name: "python-snclib=={{ sonarqube_version }}"
+        state: present
+      vars:
+        sonarqube_version: "7.9" # Update according to your SonarQube version
+
+    - name: Set environment variables
+      shell: |
+        export SONAR_HOST_URL=http://your_sonarqube_server_url
+        export SONAR_TOKEN={{ sonar_token }}
+      args:
+        creates: "/tmp/.env"
+      become: true
+      vars:
+        sonar_token: "YOUR_SONARQUBE_API_KEY" # Replace with your actual API token
+
+    - name: Run SonarQube Scan
+      command: /usr/bin/sonar-scanner \
+                --project {{ project_name }} \
+                --projectKey="{{ project_key }}" \
+                --source {{ source_path }} \
+                --verbose \
+                --configuration {{ configuration_file }}
+      args:
+        chdir: "{{ source_path }}"
+      env:
+        SONAR_LOG_LEVEL: INFO
+      vars:
+        project_name: my_project_name # Replace with your specific project name
+        project_key: MYPROJECT # Replace with your specific project key (lowercase)
+        source_path: path/to/my/src # Replace with your source code location
+        configuration_file: sonar-project.properties # Path to your custom properties file
+                            # If not provided, default values will be used
+
+    - name: Display scan results
+      debug: msg="SonarQube Scan Results:\n\n{{ lookup('file', '/home/user/.sonar/lastAnalysisReport.html')|from_json }}"
+      register: sonar_results
+      when: stat('/home/user/.sonar/lastAnalysisReport.html') == 0
+      vars:
+        user: root # Replace with appropriate username if different from 'root'
