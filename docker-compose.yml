@@ -7,7 +7,7 @@ services:
     build: 
       context: docker/jenkins
     volumes:
-      - ./jenkins_data:/var/jenkins_home
+      - ./jenkins_data:/var/jenkins_data
       - /var/run/docker.sock:/var/run/docker.sock # Add this line to mount the Docker socket
       - /usr/bin/docker:/usr/bin/docker
       - ./docker/jenkins/casc_configs:/var/jenkins_conf

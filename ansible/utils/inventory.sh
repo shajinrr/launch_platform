@@ -65,7 +65,7 @@ for environment in "${environments[@]}"; do
     for container in $(docker ps --format "{{.Names}}" --filter "label=environment=$environment" | grep -E ".*_app$"); do
         ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
         if [ -n "$ip" ]; then
-            echo "$container ansible_host=$ip ansible_user=centos ansible_ssh_private_key_file=/path/to/your/private/key.pem ansible_ssh_common_args='$ansible_ssh_common_args' ansible_become=$ansible_become" >> "$inventory_file"
+            echo "$container ansible_host=$ip ansible_user=centos ansible_ssh_private_key_file=..//..//..//jenkins_data/.ssh/id_rsa ansible_ssh_common_args='$ansible_ssh_common_args' ansible_become=$ansible_become" >> "$inventory_file"
         else
             echo "Error: Unable to get IP for container $container"
         fi
@@ -78,7 +78,7 @@ for environment in "${environments[@]}"; do
     for container in $(docker ps --format "{{.Names}}" --filter "label=environment=$environment" | grep -E ".*_web$"); do
         ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
         if [ -n "$ip" ]; then
-            echo "$container ansible_host=$ip ansible_user=ubuntu ansible_ssh_common_args='$ansible_ssh_common_args' ansible_become=$ansible_become" >> "$inventory_file"
+            echo "$container ansible_host=$ip ansible_user=ubuntu ansible_ssh_private_key_file=..//..//..//jenkins_data/.ssh/id_rsa ansible_ssh_common_args='$ansible_ssh_common_args' ansible_become=$ansible_become" >> "$inventory_file"
         else
             echo "Error: Unable to get IP for container $container"
         fi

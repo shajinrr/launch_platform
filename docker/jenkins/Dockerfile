@@ -1,6 +1,6 @@
 # Use the official Jenkins LTS base image
 FROM jenkins/jenkins:latest
-
+ARG USERNAME=jenkins
 USER root
 
 RUN apt-get update && apt-get -yf install apt-transport-https \
@@ -13,13 +13,14 @@ RUN apt-get update && apt-get -yf install apt-transport-https \
       wget \
       gnupg \
       software-properties-common \
+      sudo \
       docker.io \
       ansible && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
 # RUN apt-get install -y systemctl
 
-# #Install Docker Compose
-# RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+#Install Docker Compose
+RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 
 
 
@@ -69,9 +70,14 @@ RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 
 #Add the Job automatically during Launch
 RUN mkdir -p /var/jenkins_home/jobs/freestyle_test
-#COPY jobs/freestyle_test/config.xml /var/jenkins_home/jobs/freestyle_test/config.xml
-ADD jobs/freestyle_test/config.xml /var/jenkins_home/jobs/freestyle_test/config.xml
 
+COPY jobs/freestyle_test/config.xml /var/jenkins_home/jobs/freestyle_test/config.xml
+
+#Add the Jenkins user to the docker group:
+RUN usermod -aG docker $USERNAME
+RUN apt install sudo -y
+#Assign Sudoers access to jenkins user
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/$USERNAME
 
 #id_rsa.pub file will be saved at /root/.ssh/
 #RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
