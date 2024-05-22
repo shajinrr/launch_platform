@@ -1,3 +1,22 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          id: "shajin"
+          password: "{AQAAABAAAAAQZQANLqp8XuBpBj2JCMvIRyGYI1laPAkGCKenwcYsUaE=}"
+          scope: GLOBAL
+          username: "shajin"
+    - credentials:
+      - basicSSHUserPrivateKey:
+          id: "shajin-ssh-creds"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: SYSTEM
+          username: "shajin"
+      domain:
+        name: "test"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -14,11 +33,9 @@ jenkins:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
   disabledAdministrativeMonitors:
-  - "jenkins.diagnostics.RootUrlNotSetMonitor"
+  - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
-  - name: "master-label"
-  labelString: "master-label"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -59,11 +76,6 @@ jenkins:
         - "timezone"
         - "experimentalFlags"
   slaveAgentPort: 50000
-  systemMessage: |2+
-
-
-     setup for Jenkins Configuration as Code plugin......
-
   updateCenter:
     sites:
     - id: "default"
@@ -125,7 +137,7 @@ unclassified:
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleForNormalize
   gitHubPluginConfig:
-    hookUrl: "http://172.18.0.2:8080/github-webhook/"
+    hookUrl: "http://172.19.0.8:8080/github-webhook/"
   globalTimeOutConfiguration:
     operations:
     - "abortOperation"
@@ -143,7 +155,7 @@ unclassified:
     storage: "file"
   location:
     adminAddress: "address not configured yet <nobody@nowhere>"
-    url: "http://172.18.0.2:8080/"
+    url: "http://172.19.0.8:8080/"
   mailer:
     charset: "UTF-8"
     useSsl: false
@@ -159,10 +171,10 @@ unclassified:
     showEntireCommitSummaryInChanges: false
     useExistingAccountWithSameEmail: false
   sonarGlobalConfiguration:
-    buildWrapperEnabled: true
+    buildWrapperEnabled: false
     installations:
-    - name: "sonar-server"
-      serverUrl: "sonarqube.commmmmm"
+    - name: "test"
+      serverUrl: "sonar.com:9000"
       triggers:
         skipScmCause: false
         skipUpstreamCause: false
