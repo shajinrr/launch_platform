@@ -1,0 +1,1 @@
+docker ps --format '{{.Names}} {{.ID}}' | grep -E '^(prod|dev|stge)' | while read -r name id; do echo -n "$name "; docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$id"; done > ips.txt
