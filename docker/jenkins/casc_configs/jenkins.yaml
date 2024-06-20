@@ -3,58 +3,125 @@ credentials:
     domainCredentials:
     - credentials:
       - usernamePassword:
-          id: "shajin"
-          password: "{AQAAABAAAAAQZQANLqp8XuBpBj2JCMvIRyGYI1laPAkGCKenwcYsUaE=}"
+          id: shajin
+          password: '{AQAAABAAAABAPP+3udrXr4DW2yrHW+YTVpwYRyq7uA/Kewr96E74AmP3opRFAfE5oeK5hd8lZ7ky+Z0uF69AWkQsTgbKC7mh/fBYeb5MSkyrh6Ij4JYeY+A=}'
           scope: GLOBAL
-          username: "shajin"
+          username: shajin
     - credentials:
       - basicSSHUserPrivateKey:
-          id: "shajin-ssh-creds"
+          id: shajin-ssh-creds
           privateKeySource:
             directEntry:
-              privateKey: "{AQAAABAAAAowy/J4BpAXEW59I3kzyeRvY19wZZb2XHHKcsGAFkyfog4sWsngKWL/mMi65y/ncI2sgs9qFnWEEKj3oVXslnaUkGpf2IFRGD2KE9qTmUwA5h0SMYBImEUbAVKamsOwXRHSiIGKDHPB6RjxDAk/c76y31qtO2GyTgdEvmV0psi2jctKyVNcyj+LNUIwct0ylH6ix3b+Yz6zLWH4SequZIFp6HrhSgGOK4mTpLwOyDZAwfRQUYr9y2aGo81oMG8r7iLvbEIF9QRKDm0tyTYirb9CA83fn7WO5Mtw4liTijIK/50dU85z9+cUWBL+MCoIbN3TlVUbI2gpcjZfZcfYaeJXOmpv+0dXbXKpkYKPNQYbgtuyxFiu7mFjRVHWG/2CHgxoEnOCJ1dusbp5PudL98hudFuimXRmRaECKJOIctPKkcL4oMRHHKDfpd9HlSk/P6ZNYAPb43WadaKnKOK1YML2U1ptUkqKYqR8MhzjMRMBbNEA1UrNCdpzWEy/yy+AuYKIysfArUBAz+yNg5T3dSq2XHF/CSroPeOyV061Nx2VNxfh/LJslT5Mj8QPGEJzYWHQS7DYFMXEeQC+hRGyzooOkgEaOzJB10iv1vtEf2rGPdcakZ65f5dr5Isy7xG7D7gjBLNIFaI1t/+hT6tGpeQiQNxpaX21NpHAENEwV1vON6uYf646c5oG0ZcGVd267ZDEbhNdX/6ckWGJRpAtcvLN5beQ55GJpJ1oN47JX044l8Z8gnG5GtTlCDO05sZvlN+TUowTWAnmO3GwCiJ9RthlcW/a130Afv/WIMJ4aWc/22UO1kA7RhgiCb4qpwyxGppH4pbDjPTozvzLqqf33/qO8vOrrRWkNEVHYvNUk+DjlFiO+hIcb+ifuJIC5qF9GmD6WnLnbv4bj7B+SXYQpp/Y0H5z5vHr2ux6KbVJnQOGTYLAAU8BW/2zF2N+A1pMQ9Me4EG9phaEun/Xlvyxf4DVQiZHLkBeqa4qFcirxCOk8hxUfQyqNRlH2fUsxZ/IkgBQ0f12N9KrhNKCxJrMfWwMDp6azDt35JxAmOFdS8ZyWaesZYZ5sIaqG6Ct8Z5D6gwslj0eX3zzzvu9vS+wILwqGrEO/FCAAkODFuKLXnwuqu/4Mjt+xnfH6PtRehdRcC/Hmb+kEZhRrDTcYlXEL4qOH7lLTiLrnJ+4F7LIlpaJc7jVRW4x3iV7wjpLVUk+jgR6YBlYRTlgfsqhvK4ynfkzj1HhOkxe9lvm0QZ6HUBqEIyWwxY441CVX/iFQ6OQ98euZa+r8vzCYY9yfq4iTnKvtGUEn7VrB1EaIYiaAc2e8Te2XJDg/jwbaPTxJBAvwgyqEja9a8gVy0gh4Kl6gX760PSO1NniQDF9e171jX15URSjSF4cCIal/mZI1jvQhmsjTH5JnUdhWPo1DDuMsHE2dvOy5xqinzprY8mHl8n18XZAidjMQJw5/EmgoIH9eB00PQhJ+pTXbe6njbe9ldBCSXEbhQC45RYjdlSMJVCp13QWUoDqZ49/EvKi7hnGBMB8ANX1s9hb+q1iBsWEDdm9n27Kd/IvKyx6ndRWLtGLyZVMSqLAY72QwMN5IAfu1EWCeBCN5Qo1lPlrWQA0hkk3wreBo4CyYxkKAiYxugCUIUGG6G5dZe8QXoYFdSO2FGNf7N2N7jfzMNb8z7jFDStdstLoTE67ziO2Kyr0P3k2OfmPCHZNCRWQJpJmG/EOLz4l5BM546NIeiYuZ29ITkl6GfRv6Up0gsy9lAZG7iDMIAU4+wiVO88deKA6vkBKquS8uk8FvN9uhAJ/XibMjEJhXCSH/rESwBJaxLg5Q6UtElQ65k8FtafHN5JYXzafCOkEiUdJUp1RXcBBO9Rwzc+BFIrFqNnLRMvi3wIHAENrvh3tnJRUu6I+vMMYR1m4MoZIfdjcMFkl/92S7MxN30O9R1nPV8U1anFgSG5heimoGfV1yZj7xzwnrd8EyqA5QYLcdwzbBA6KDJMWFKDDwkJfENZA6aExwWslgXiQTN+W/cSwtHjFYGN+S509EDbuacg/Zi0goSUZdwFfELyOCQs+gyIcyi0HocwIksY4cm2JKQuvkRx7TzX1MbkJspd2/Y74t8yFLSHnYvqxfLlY3rMJRe125gi+wl76RbdxoB1N6qWMaK0ZonXqzy2xSoGGtaz+Wp+8zrETFZvFIst5SyrSR7Q4iDTfqX63A5LbFhbRk7NhLGU50qeneiKI4j5YBjDiIgohOWraQ6L1wzOq768sjq9UTX770WfVm1ZbS1pUzxk+iWCnH/n54AVDhq9RA0SdXbdzpDGtp7WtCgpx9nK73YKOoALa/8Cfwk/s4WkkSYHAsX/8PpCC/ZeRPbJslGKyCRRZ01G0l7unJppTuT5HT4oVKaL0RlW8iH4o3yt6ZEQ9bRzC9tEJpSyX6f20gRT1CtEB7xZ4rG4LGV6+YiYOC1GvMO5AJNKUX9GdZcu6Qpqcb+LbLyVu10LwzAGr8fALBBwm4XvU8gRBbZS9OPVqbmU/ctW8+eXERU3QUlbMIv1FBDLVNPp2JyCMET305Lg7TToVz41UcTKhLb/tBP6hmvnvvA9aDGMH7nOBXXh6cZu+PnFtkY9DzpjJ3tiqO2oMIpTb2jg1mw6ZfXp2o0/dLEcvnJ6aIzWZjAompnOudmGUniqYvAA0tzez3JcxnRKx6Nc2jzz0datMiWS7Hi6Bdi1mxIsbYriLt6lcQ8zb2Cjb3Gg+ja2Xk52LjNoacHnPp6jp5xESmO0UXvWCoNkaygp1whZ7+GfYocyDxNJa+Lm6smCUjDe0GDv8jDDuM9zH3VCUm0+C5ftmOU96G3pUshh5r9TYBpyMu6kBfKQE0+rXCaXXco1EZ52xyzhhgNgaZv8RVa9x/3/PQLdrZ/BMep4tUQAr8wz3uFCQ4MXeuzcDygCdcog/Wc3KzF2J5XMvae2Nw5m6FRNiyi4VMfER5lLrDF5UU/I/UiH1SK/BtuLugqDsu292Muiv/CjX6/07P9wLcyfuDS7ecu2Uyv16AxNnKcuRw9cgcm/6UYZrXSQObODa/p3slCFv+y9MCNBgASbQDJLlldPbu/ovy5ax+noOM8QP/ypZJT8IxsHdJUT8fiJ6w1/wZNIJvgljHlf6h+FFlUpKm9UOe58Iz5SYYTKYJ4b/XpjJTunnTvHW3tUYo+xmtSU5Akfgr1pcmDbN+xx3Q1QqFRSHiV84AR2OT6m8dcmJFLxoGYgtYn9gP4dzYXWZLvRA+3avpP8idXn6tqrhgLvC4wJfI2b7tyB7iM7gelD1EfOcO64gD2RK4wHnhCMdFvAvL+lzdAn9IPeUVdwBqqPDQ2Yl4Svue7/Qks6mkfEkxwvrGoerP9KeD1M5YkFFXkRAoWISC5ttlAKVW7RfLX3AQd3EHvbLL2YDC0n9uaMMWOYFuFBWAPek9by+lpMCQY5gAp5aCb4EPhCIOnOXSG8QEXoVlXLwJqRY77wXUqIw8XWmUXhTrtQdKa4=}"
+              privateKey: '{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}'
           scope: SYSTEM
-          username: "shajin"
+          username: centos
       domain:
-        name: "test"
+        name: test
 jenkins:
   agentProtocols:
-  - "JNLP4-connect"
-  - "Ping"
+  - JNLP4-connect
+  - Ping
   authorizationStrategy:
     globalMatrix:
       entries:
       - userOrGroup:
-          name: "admin"
+          name: admin
           permissions:
-          - "Overall/Administer"
+          - Overall/Administer
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
   disabledAdministrativeMonitors:
-  - "hudson.util.DoubleLaunchChecker"
+  - hudson.util.DoubleLaunchChecker
   labelAtoms:
-  - name: "built-in"
-  markupFormatter: "plainText"
+  - name: built-in
+  - name: dev_web
+  - name: stge_app
+  - name: prod_web
+  - name: prod_app
+  - name: stge_web
+  - name: dev_app
+  markupFormatter: plainText
   mode: NORMAL
-  myViewsTabBar: "standard"
+  myViewsTabBar: standard
   nodeMonitors:
-  - "architecture"
-  - "clock"
+  - architecture
+  - clock
   - diskSpace:
-      freeSpaceThreshold: "1GiB"
-      freeSpaceWarningThreshold: "2GiB"
-  - "swapSpace"
+      freeSpaceThreshold: 1GiB
+      freeSpaceWarningThreshold: 2GiB
+  - swapSpace
   - tmpSpace:
-      freeSpaceThreshold: "1GiB"
-      freeSpaceWarningThreshold: "2GiB"
-  - "responseTime"
+      freeSpaceThreshold: 1GiB
+      freeSpaceWarningThreshold: 2GiB
+  - responseTime
+  nodes:
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.6
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: dev_web
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.9
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: stge_app
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.7
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: prod_web
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.5
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: prod_app
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.4
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: stge_web
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: shajin-ssh-creds
+          host: 172.18.0.3
+          port: 22
+          sshHostKeyVerificationStrategy: nonVerifyingKeyVerificationStrategy
+      name: dev_app
+      remoteFS: /home/centos/jenkins_workdir
+      retentionStrategy: always
   numExecutors: 2
   primaryView:
     all:
-      name: "all"
-  projectNamingStrategy: "standard"
+      name: all
+  projectNamingStrategy: standard
   quietPeriod: 5
   remotingSecurity:
     enabled: true
@@ -64,30 +131,30 @@ jenkins:
       allowsSignup: false
       enableCaptcha: false
       users:
-      - id: "admin"
-        name: "admin"
+      - id: admin
+        name: admin
         properties:
-        - "apiToken"
-        - "consoleUrlProvider"
-        - "mailer"
-        - "myView"
+        - apiToken
+        - consoleUrlProvider
+        - mailer
+        - myView
         - preferredProvider:
-            providerId: "default"
-        - "timezone"
-        - "experimentalFlags"
+            providerId: default
+        - timezone
+        - experimentalFlags
   slaveAgentPort: 50000
   updateCenter:
     sites:
-    - id: "default"
-      url: "https://updates.jenkins.io/update-center.json"
+    - id: default
+      url: https://updates.jenkins.io/update-center.json
   views:
   - all:
-      name: "all"
-  viewsTabBar: "standard"
+      name: all
+  viewsTabBar: standard
 globalCredentialsConfiguration:
   configuration:
-    providerFilter: "none"
-    typeFilter: "none"
+    providerFilter: none
+    typeFilter: none
 appearance:
   prism:
     theme: PRISM
@@ -100,28 +167,28 @@ security:
     allowedOnAgents: false
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
-    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+    sshHostKeyVerificationStrategy: knownHostsFileVerificationStrategy
   sSHD:
     port: -1
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
-    - "jobBuildDiscarder"
+    - jobBuildDiscarder
   buildStepOperation:
     enabled: false
   email-ext:
     adminRequiredForTemplateTesting: false
     allowUnregisteredEnabled: false
-    charset: "UTF-8"
+    charset: UTF-8
     debugMode: false
-    defaultBody: |-
-      $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+    defaultBody: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
 
-      Check console output at $BUILD_URL to view the results.
-    defaultContentType: "text/plain"
-    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+
+      Check console output at $BUILD_URL to view the results.'
+    defaultContentType: text/plain
+    defaultSubject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
     defaultTriggerIds:
-    - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+    - hudson.plugins.emailext.plugins.trigger.FailureTrigger
     maxAttachmentSize: -1
     maxAttachmentSizeMb: -1
     precedenceBulk: false
@@ -133,14 +200,14 @@ unclassified:
     httpClientTimeoutInSeconds: 1
   fingerprints:
     fingerprintCleanupDisabled: false
-    storage: "file"
+    storage: file
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleForNormalize
   gitHubPluginConfig:
-    hookUrl: "http://172.19.0.8:8080/github-webhook/"
+    hookUrl: http://172.19.0.8:8080/github-webhook/
   globalTimeOutConfiguration:
     operations:
-    - "abortOperation"
+    - abortOperation
     overwriteable: false
   injectionConfig:
     allowUntrusted: false
@@ -152,12 +219,12 @@ unclassified:
     injectMavenExtension: false
     mavenCaptureGoalInputFiles: true
   junitTestResultStorage:
-    storage: "file"
+    storage: file
   location:
-    adminAddress: "address not configured yet <nobody@nowhere>"
-    url: "http://172.19.0.8:8080/"
+    adminAddress: address not configured yet <nobody@nowhere>
+    url: http://172.19.0.8:8080/
   mailer:
-    charset: "UTF-8"
+    charset: UTF-8
     useSsl: false
     useTls: false
   pollSCM:
@@ -173,8 +240,8 @@ unclassified:
   sonarGlobalConfiguration:
     buildWrapperEnabled: false
     installations:
-    - name: "test"
-      serverUrl: "sonar.com:9000"
+    - name: test
+      serverUrl: sonar.com:9000
       triggers:
         skipScmCause: false
         skipUpstreamCause: false
@@ -182,13 +249,13 @@ unclassified:
     workspaceFormat: 8
   timestamper:
     allPipelines: false
-    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
-    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+    elapsedTimeFormat: '''<b>''HH:mm:ss.S''</b> '''
+    systemTimeFormat: '''<b>''HH:mm:ss''</b> '''
 tool:
   git:
     installations:
-    - home: "git"
-      name: "Default"
+    - home: git
+      name: Default
   mavenGlobalConfig:
-    globalSettingsProvider: "standard"
-    settingsProvider: "standard"
+    globalSettingsProvider: standard
+    settingsProvider: standard

@@ -16,37 +16,23 @@ services:
     networks:
       - net
       
-  # centos_1:
-    # image: centos7-custom-image
-    # build:
-    #   context: ./docker/centos7
-    # restart: unless-stopped
-    # networks:
-    #   - net
-
-  # centos_2:
-  #   image: centos7-custom-image
-  #   build:
-  #     context: ./docker/centos7
-  #   restart: unless-stopped
-  #   networks:
-  #     - net
-
-  # ubuntu_1:
-    # image: ubuntu-custom-image
-    # build:
-    #   context: ./docker/ubuntu
-    # restart: unless-stopped
-    # networks:
-    #   - net 
-  # ubuntu_2:
-  #   image: ubuntu-custom-image
-  #   build:
-  #     context: ./docker/ubuntu
-  #   restart: unless-stopped
-  #   networks:
-  #     - net 
-
+  build-agent: 
+    container_name: build-agent
+    image: build-agent-image
+    user: root
+    build: 
+      context: docker/build-agent
+    expose:
+      - 22
+    networks:
+      - net
+  # agent:
+  #   image: jenkins/ssh-agent:jdk11
+  #   privileged: true
+  #   user: root
+  #   container_name: agent
+  #   expose:
+  #     - 22
   centos_1:
     container_name: prod_app
     image: centos7-custom-image
@@ -112,8 +98,6 @@ services:
       - net 
     labels:
       - "environment=dev"
-
-
 
 networks:
   net:

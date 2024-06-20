@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts AS build
+FROM jenkins/jenkins:2.452 AS build
 ARG USERNAME=jenkins
 USER root
 
@@ -13,6 +13,7 @@ RUN apt-get update && apt-get -yf install sudo apt-transport-https \
       gnupg \
       software-properties-common \
       docker.io \
+      openssh-server \
       ansible && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
 # RUN apt-get install -y systemctl
@@ -52,12 +53,14 @@ RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-c
 RUN curl -fsSL https://raw.githubusercontent.com/faudeltn/Jenkins/master/build/centos/plugins.txt -o /usr/share/jenkins/ref/plugins.txt \
 && echo "configuration-as-code" >> /usr/share/jenkins/ref/plugins.txt \
 && echo "sonar" >> /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^ace-editor$/d' /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^handlebars$/d' /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^momentjs$/d' /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^pipeline-model-declarative-agent$/d' /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^jquery-detached$/d' /usr/share/jenkins/ref/plugins.txt \
-&& sed -i '/^workflow-cps-global-lib$/d' /usr/share/jenkins/ref/plugins.txt
+&& echo "ssh-agent" >> /usr/share/jenkins/ref/plugins.txt 
+
+# && sed -i '/^ace-editor$/d' /usr/share/jenkins/ref/plugins.txt \
+# && sed -i '/^handlebars$/d' /usr/share/jenkins/ref/plugins.txt \
+# && sed -i '/^momentjs$/d' /usr/share/jenkins/ref/plugins.txt \
+# && sed -i '/^pipeline-model-declarative-agent$/d' /usr/share/jenkins/ref/plugins.txt \
+# && sed -i '/^jquery-detached$/d' /usr/share/jenkins/ref/plugins.txt \
+# && sed -i '/^workflow-cps-global-lib$/d' /usr/share/jenkins/ref/plugins.txt
 
 # Install recommended plugins listed in plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
@@ -77,7 +80,7 @@ ENV JENKINS_PASS ThisIs@StrongP@ssword
 # Copy the Groovy script
 COPY 10-sleep.groovy /usr/share/jenkins/ref/init.groovy.d/
 COPY 20-default-user.groovy /usr/share/jenkins/ref/init.groovy.d/
-
+COPY 30-sshd.groovy /usr/share/jenkins/ref/init.groovy.d/
 # Set ownership of Jenkins home directory
 RUN chown -R jenkins:jenkins /var/jenkins_home
 # Add the Jenkins user to the docker group:
